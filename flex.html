@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flex Display</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /*전체부모*/
+        #wrap {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /*ul박스*/
+        #wrap>ul {
+            display: flex;
+
+            /*
+                flex 란?
+                - 가변적인 자식요소를 컨트롤하기 위해
+                css3에서 새롭게 선보인 display기술
+                - 자식요소를 같은 비율 혹은 다른 비율로
+                분할이 쉽다.
+                - 자식요소의 순서 혹은방향을 일괄변경 가능.
+            */
+
+            flex-direction: row;
+            /*
+                flex-direction 속성은 등분할 방향을 지정함
+                1)row(좌->우 방향으로) : 기본값(안써도 나옴)
+                2)row-reverse(우->좌) : 순서역전
+                3)column(위->아래) : 세로방향
+                4)column-reverse(아래->위) : 순서역전
+            */
+
+            /*ul 일반설정*/
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        #wrap>ul>li {
+            position: relative;
+            /*부모자격*/
+            flex: 1;
+            /*크기가 설정되지않은 자식요소의 등분할*/
+            /*
+                부모요소가 display:flex 설정된 자식요소의 속성으로
+                flex를 사용할경우
+                - 자식요소의 크기가 지정안되고 비율을 숫자로 나타낸다.
+                - 1이라는 숫자는 모든 자식이 같은비율을 가짐.
+                - flex-grow : 비율을 늘리는 속성(숫자가 1보다 큼)
+                - flex-shrink : 비율을 줄이는 속성(숫자가 1보다 작음)
+                - flex만 사용하여 flex-grow를 대신함
+            */
+
+            /*트랜지션*/
+            transition: all .4s ease-in-out;
+            overflow: hidden;
+        }
+
+        /*li에 마우스 오버시 비율 늘리기*/
+        #wrap>ul>li:hover {
+            flex: 1.4;
+            /* 마우스 오버시 기본설정값 1보다 큰 비율로 변경
+            나머지 요소들은(등분할함) 자동으로 조정되어 줄어듬
+            기본크기의 1.4배 (140%)*/
+        }
+
+
+        /*li각 셋팅*/
+        #wrap>ul>li:nth-child(1) {
+            background: url(images/Lotte/m01_bg.jpg) no-repeat center/cover;
+        }
+
+        #wrap>ul>li:nth-child(2) {
+            background: url(images/Lotte/m02_bg.jpg) no-repeat center/cover;
+        }
+
+        #wrap>ul>li:nth-child(3) {
+            background: url(images/Lotte/m03_bg.jpg) no-repeat center/cover;
+        }
+
+        #wrap>ul>li:nth-child(4) {
+            background: url(images/Lotte/m04_bg.jpg) no-repeat center/cover;
+        }
+
+        #wrap>ul>li:nth-child(5) {
+            background: url(images/Lotte/m05_bg.jpg) no-repeat center/cover;
+        }
+
+        /*타이틀 이미지*/
+        #wrap>ul>li>img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+        }
+        
+        /*가상요소로 어둡게 만들기*/
+        #wrap>ul>li::after{
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: .7;
+            transition: opacity .3s ease-out;
+        }
+        /*마우스 오버시 커버투명하게*/
+        #wrap>ul>li:hover::after{
+            opacity: 0;
+        }
+        
+        /*중앙타이틀*/
+        .tit {
+            display: flex;
+            /*등분할!*/
+            /*flex옵션*/
+            justify-content: space-evenly;
+            /*
+                justify-content 속성
+                - 수평정렬속성
+                1) flex-start : 왼쪽끝(기본값)
+                2) flex-end : 오른쪽끝
+                3) center : 중앙
+                4) space-around : 각 요소 양쪽간격 일정
+                5) space-between : 각 요소 사이값 일정(끝은 붙음)
+                6) space-evenly : 각 요소와 박스사이의 공간을 균등하게 배분함
+            */
+            align-items: center;
+
+            /*   
+                align-items 속성
+                - 수직정렬옵션
+                1) flex-start : 세로상단(기본값)
+                2) flex-end : 세로하단
+                3) center : 세로중앙
+                4) stretch : 세로방향으로 꽉채워 늘림
+                    (단, 세로크기를 지정하지 않아야함)
+                5) baseline : 요소간 세로크기가 서로 다를경우 
+                            큰요소의 아랫선에 맞춰서 정렬   
+            
+            */
+
+
+            /*ol일반설정*/
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 100px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: 5px double #fff;
+        }
+
+        /*
+            하위 li의 크기를 주면 그 크기를 등분할 함!
+            이런 경우엔 flex:숫자 설정을 하지 않는다!
+        */
+        .tit>li {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            /*원*/
+            border: 3px solid #fff;
+            background-color: #f00;
+            font: bold 14px/50px Verdana;
+            color: #fff;
+            text-align: center;
+        }
+
+        /*타이틀2*/
+        .t2 {
+            top: 20%;
+        }
+
+        /*하단로고바*/
+        .gatelogo {
+            position: absolute;
+            z-index: 1000;
+            background-color: #da041c;
+            height: 5%;
+            text-align: center;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /*하단로고 이미지*/
+        .gatelogo img {
+            margin-top: .5%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <ul>
+            <li>
+                <img src="images/Lotte/m01_txtbox.png" alt="타이틀">
+            </li>
+            <li>
+                <img src="images/Lotte/m02_txtbox.png" alt="타이틀">
+            </li>
+            <li>
+                <img src="images/Lotte/m03_txtbox.png" alt="타이틀">
+            </li>
+            <li>
+                <img src="images/Lotte/m04_txtbox.png" alt="타이틀">
+            </li>
+            <li>
+                <img src="images/Lotte/m05_txtbox.png" alt="타이틀">
+            </li>
+        </ul>
+
+        <!--타이틀박스1-->
+        <ol class="tit">
+            <li>L</li>
+            <li>O</li>
+            <li>T</li>
+            <li>T</li>
+            <li>E</li>
+        </ol>
+        <!--타이틀박스2-->
+        <ol class="tit t2">
+            <li>W</li>
+            <li>O</li>
+            <li>R</li>
+            <li>L</li>
+            <li>D</li>
+        </ol>
+
+        <!--하단로고바-->
+        <div class="gatelogo">
+            <img src="images/Lotte/lotte_logo.gif" alt="로고">
+        </div>
+
+
+
+
+
+    </div>
+
+</body></html>

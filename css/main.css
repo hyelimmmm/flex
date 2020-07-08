@@ -1,0 +1,503 @@
+@charset "utf-8";
+/* Slice Move PJ CSS - main.css */
+
+/*공통css*/
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    font-family: Helvetica, Arial, "sans-serif";
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+}
+
+/*IR*/
+.bld {
+    display: none;
+}
+
+/*메인페이지 css*/
+
+/*사이트커버*/
+#scover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#000;
+    opacity: .2;
+    z-index: 999;
+    display: none; /*숨김*/
+}
+
+/*인트로커버*/
+#icover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+/*scover에서 돌아다닐 닫기버튼*/
+#cbtn{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999999999999;
+    display: none;/*안보이게*/
+}
+
+
+/*상단영역*/
+#top{
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    color: #fff;
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+/*큰타이틀*/
+#top h1{
+    font-size: 15px;
+    font-weight: bold;
+    padding-top: 20px;
+}
+/*작은타이틀*/
+#top h2{
+    font-size: 12px;
+}
+/*햄버거버튼*/
+#ham{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    font: 42px/70px Verdana;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+}
+
+/*gnb*/
+#gnb{
+    position: fixed;
+    top: 0;
+    left: -300px;
+    /*왼쪽바깥에 나가있음*/
+    width: 300px;
+    height: 100%;
+    z-index: 999999;/*가장 위*/
+}
+#gnb>ul{
+    width: 100%;
+    height: 100%;
+    background-color: #Fc0;
+}
+/*gnb list*/
+#gnb>ul>li{
+    position: relative;
+    left: -100%;
+    /*li를 박스 왼쪽에 나가있게 함*/
+    width: 100%;
+    height: 15%;
+    /*대부분(5개) 높이비율 15%*5개=75%*/
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+    font-family: Verdana;
+    color: #fff;
+}
+
+/*가상요소 덮개 class*/
+#gnb>ul>li.dim::after{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#000;
+    opacity: .2;
+}
+
+/*li높이값 개별조정*/
+#gnb>ul>li:nth-child(1),
+#gnb>ul>li:nth-child(7){
+    height: 7.5%;
+    /*
+        7.5 * 2개 = 15%
+    */
+}
+
+#gnb>ul>li:nth-child(8){
+    height: 10%;
+}
+
+/*메뉴글자 세로중앙맞추기(높이값이 모두 다름)*/
+#gnb > ul > li > a > span {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+/*메뉴글자리스트 a요소*/
+#gnb>ul>li>a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-decoration: none;
+}
+
+/*메뉴글자리스트 마우스오버시*/
+#gnb>ul>li>a:hover{
+    background-color: #444 !important;
+}
+
+/*gnb메뉴 배경색(가상요소가 기존 li힘이 약함그래서 위에 !important 사용!!!)*/
+#gnb>ul>li:nth-child(1) a{
+    background-color: #2c2c2c;
+}
+#gnb>ul>li:nth-child(2) a{
+    background-color: #FC0;
+}
+#gnb>ul>li:nth-child(3) a{
+    background-color: #656565;
+}
+#gnb>ul>li:nth-child(4) a{
+    background-color: #545454;
+}
+#gnb>ul>li:nth-child(5) a{
+    background-color: #494949;
+}
+#gnb>ul>li:nth-child(6) a{
+    background-color: #3c3c3c;
+}
+#gnb>ul>li:nth-child(7) a{
+    background-color: #2c2c2c;
+}
+#gnb>ul>li:nth-child(8) a{
+    background-color: #333;
+}
+
+/*컨텐츠 전체박스*/
+#wrap {
+    position: relative;
+    left: 0;/*기준값*/
+    width: 100%;
+    height: 100%;
+}
+
+#wrap > ul {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#wrap > ul > li {
+    flex: 1;
+    /*트랜지션*/
+    transition: all .3s ease-out;
+    overflow: hidden;
+    /*넘치는 자식요소 숨기기*/
+}
+
+/*각 리스트 셋팅*/
+/*1.크롬*/
+#wrap > ul > li:nth-child(1) {
+    background-color: #FC0;
+}
+
+/*2.파폭*/
+#wrap > ul > li:nth-child(2) {
+    background-color: #F90;
+}
+
+/*3.익스*/
+#wrap > ul > li:nth-child(3) {
+    background-color: #0CF;
+}
+
+/*4.사파리*/
+#wrap > ul > li:nth-child(4) {
+    background-color: #06F;
+}
+
+/*5.오페라*/
+#wrap > ul > li:nth-child(5) {
+    background-color: #F63;
+}
+
+/*마우스 오버시 폭변경하기*/
+#wrap > ul > li:hover {
+    flex: 2;
+    /*그라데이션 배경색*/
+    background-image: radial-gradient(circle,
+        rgba(255,255,255,.5),rgba(255,255,255,0)
+    );
+}
+
+/*마우스 오버시 .cbox하위 li 1번,3번 보이게하기*/
+#wrap > ul > li:hover .cbox > li:nth-child(1),
+#wrap > ul > li:hover .cbox > li:nth-child(3){
+    opacity: 1;
+}
+
+/*********** 컨텐츠 박스 ***********/
+.cbox {
+    position: relative;
+    top: 15%;
+    width: 270px;
+    height: 81%;
+    margin: 0 auto;
+    /*outline: 1px solid red;*/
+}
+
+.cbox > li {
+    text-align: center;
+    /*인라인요소 가운데*/
+    color: #fff;
+    /*트렌지션*/
+    transition: opacity .4s;
+}
+
+
+/*1.점유율+3.버튼박스 처음에 안보이게*/
+.cbox > li:nth-child(1),
+.cbox > li:nth-child(3){
+    opacity: 0;
+}
+
+/*점유율 숫자*/
+.cbox > li:nth-child(1) h2 {
+    font-size: 58px;
+    font-weight: bold;
+}
+
+/*점유율 안내*/
+.cbox > li:nth-child(1) h4 {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/*2.로고박스*/
+.cbox > li:nth-child(2) {
+    position: absolute;
+    top: 35%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background: url(../images/OB/browsers-bg.png) no-repeat 0 0/auto 200px;
+}
+
+/*크롬로고*/
+.google {
+    background-position: 0 0;
+}
+/*크롬오버시*/
+#wrap > ul > li:nth-child(1):hover .google {
+    background-position: 0 -100px;
+}
+
+/*파폭로고*/
+.firefox {
+    background-position: -100px 0;
+}
+/*파폭오버시*/
+#wrap > ul > li:nth-child(2):hover .firefox {
+    background-position: -100px -100px;
+}
+
+/*익스로고*/
+.microsoft {
+    background-position: -200px 0;
+}
+/*익스오버시*/
+#wrap > ul > li:nth-child(3):hover .microsoft {
+    background-position: -200px -100px;
+}
+
+/*사파리로고*/
+.apple {
+    background-position: -300px 0;
+}
+/*사파리오버시*/
+#wrap > ul > li:nth-child(4):hover .apple {
+    background-position: -300px -100px;
+}
+
+/*오페라로고*/
+.opera {
+    background-position: -400px 0;
+}
+/*오페라오버시*/
+#wrap > ul > li:nth-child(5):hover .opera {
+    background-position: -400px -100px;
+}
+
+/*로고타이틀*/
+.cbox > li:nth-child(2) h4 {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+/*3.다운로드버튼*/
+.btndown {
+    /*width: 210px;*/
+    padding: 0 48px; /*호버시 가로크기 패딩밀기(유동적)*/
+    white-space: nowrap; /*줄바꿈 방*/
+    height: 57px;
+    border: 3px solid #fff;
+    border-radius: 30px;
+    color: #fff;
+    background-color: transparent;
+    /*투명하게*/
+    font: bold 15px/15px Verdana;
+    cursor: pointer;
+    margin-top: 60px;
+}
+
+/*버튼에 마우스오버시*/
+.btndown:hover {
+    background-color: #fff;
+}
+
+/*오버시 크롬글자색*/
+.btnC:hover {
+    color: #fc0;
+}
+
+/*오버시 파폭글자색*/
+.btnF:hover{
+    color: #F90;
+}
+
+/*오버시 익스글자색*/
+.btnM:hover{
+    color: #0CF;
+}
+
+/*오버시 사파리*/
+.btnA:hover{
+    color: #06F;
+}
+/*오버시 오페라글자색*/
+.btnO:hover{
+    color: #F63;
+}
+
+/*다운로드 버전 타이틀*/
+.cbox > li:nth-child(3) {
+    position: absolute;
+    top: 61%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.cbox > li:nth-child(3) > h5 {
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+/*추가문구*/
+.cbox > li:nth-child(3) > h6 {
+    font-size: 9px;
+    line-height: 10px;
+    color: #a3ecff;
+}
+
+/*4.가용시스템*/
+.cbox > li:nth-child(4) {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    /*부모박스 하단에 위치*/
+}
+
+/*타이틀*/
+.cbox > li:nth-child(4) > h5 {
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 80px;
+}
+
+/*가용시스템 이미지*/
+.cbox > li:nth-child(4) > ul {
+    display: flex;
+    justify-content: center;
+    width: 135px;
+    margin: 10px auto;
+}
+
+.cbox > li:nth-child(4) > ul > li {
+    width: 25px;
+    height: 25px;
+    margin: 0 10px;
+    background: url(../images/OB/operatingsystems-bg.png) no-repeat;
+    background-size: auto 25px;
+}
+
+/*시스템 이미지 배경위치 class*/
+/*윈도우 .win*/
+.cbox > li:nth-child(4) > ul > li.win {
+    background-position: 0 0;
+}
+
+/*맥 .mac*/
+.cbox > li:nth-child(4) > ul > li.mac {
+    background-position: -25px 0;
+}
+
+/*리눅스 .lin*/
+.cbox > li:nth-child(4) > ul > li.lin {
+    background-position: -50px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
